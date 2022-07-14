@@ -14,20 +14,44 @@ const questions = [
 
   {
     type: 'input',
-    name: 'description',
-    message: 'Please write a short description of your project.',
+    name: 'motivation',
+    message: 'What motivated you to create this project?',
+  },
+
+  {
+    type: 'input',
+    name: 'purpose',
+    message: 'What was your purpose of making this project?',
+  },
+
+  {
+    type: 'input',
+    name: 'problem',
+    message: 'What problem does your project solve?',
+  },
+
+  {
+    type: 'input',
+    name: 'learn',
+    message: 'What did you learn?',
   },
 
   {
     type: 'input',
     name: 'install',
-    message: 'What command should be run to install dependencies?',
+    message: 'What are the steps required to install your project?',
   },
 
   {
     type: 'input',
     name: 'usage',
-    message: 'Why is your project useful?',
+    message: 'What do you need to do to use your project?',
+  },
+
+  {
+    type: 'input',
+    name: 'credit',
+    message: 'Who worked on this project?',
   },
 
   {
@@ -58,7 +82,7 @@ const questions = [
   {
     type: 'input',
     name: 'test',
-    message: 'Describe how a developer can test your project',
+    message: 'Describe how a developer can test your project.',
   },
 ];
 
@@ -93,24 +117,37 @@ const promptUser = () => {
 // let license = renderLicenseBadge;
 // console.log(license);
 // TODO: Create a function to write README file
-function writeToFile({title, description, install, usage, license, contribute, test }) {
+function writeToFile({title, motivation, purpose, problem, learn, install, usage, credit, license, contribute, test }) {
     return `# ${title}
+
 ## Description
-${description}
+  *Motivation
+  ${motivation}
+
+  *Purpose
+  ${purpose}
+
+  *Problem that Project Solves
+  ${problem}
+
+  *What Developer Learned
+  ${learn}
     
 ## Table of Contents
-  - Installation
-  - Usage
-  - License
-  - Contributing
-  - Test
-  - Questions
+- [Installation](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contribute)
+- [Test](#test)
     
 ## Installation
 ${install}
     
 ## Usage
 ${usage}
+
+## Credits
+${credit}
 
 ## License
 ${license}
