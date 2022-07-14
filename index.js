@@ -1,8 +1,8 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./utils/generateMarkdown');
-const renderLicenseBadge = require('./utils/generateMarkdown');
+// const generateMarkdown = require('./utils/generateMarkdown');
+// const renderLicenseBadge = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -63,10 +63,7 @@ const questions = [
 ];
 
 const promptUser = () => {
-    return inquirer.prompt(questions)
-    .then((answers) => fs.writeFileSync('README.md', writeToFile(answers)))
-    .then(() => console.log('Successfully wrote to README file'))
-    .catch((err) => console.error(err));;
+    return inquirer.prompt(questions);
   }
 
 // console.log(questions);
@@ -96,7 +93,7 @@ const promptUser = () => {
 // let license = renderLicenseBadge;
 // console.log(license);
 // TODO: Create a function to write README file
-function writeToFile({title, description, license, install, test}) {
+function writeToFile({title, description, install, usage, license, contribute, test }) {
     return `# ${title}
 ## Description
 ${description}
