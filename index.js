@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown')
 // const generateMarkdown = require('./utils/generateMarkdown');
 // const renderLicenseBadge = require('./utils/generateMarkdown');
 
@@ -51,7 +52,7 @@ const questions = [
   {
     type: 'input',
     name: 'credit',
-    message: 'Who worked on this project?',
+    message: 'List GitHub links for all collaborators who worked on this project.',
   },
 
   {
@@ -64,7 +65,7 @@ const questions = [
   {
     type: 'input',
     name: 'contribute',
-    message: 'Describe how others can contribute to your project.',
+    message: 'Can other developers contribute to this project at this time? If no, say "no need for contributers at this time."',
   },
 
   {
@@ -84,40 +85,20 @@ const questions = [
     name: 'test',
     message: 'Describe how a developer can test your project.',
   },
+
+  {
+    type: 'input',
+    name: 'question',
+    message: 'Do you have any questions on how to implement more ideas into this project? Say "no questions" if no.'
+  }
 ];
 
 const promptUser = () => {
     return inquirer.prompt(questions);
   }
 
-// console.log(questions);
-
-
-
-
-
-
-// // TODO: Create a function to initialize app
-// function init() {
-//   promptUser()
-//   // Use writeFileSync method to use promises instead of a callback function
-//   .then((answers) => fs.writeFileSync('README.md', writeToFile(answers)))
-//   .then(() => console.log('Successfully wrote to README file'))
-//   .catch((err) => console.error(err));
-// }
-
-// // Function call to initialize app
-// init();
-
-
-
-
-// promptUser();
-// import { renderLicenseBadge } from './utils/generateMarkdown.js';
-// let license = renderLicenseBadge;
-// console.log(license);
 // TODO: Create a function to write README file
-function writeToFile({title, motivation, purpose, problem, learn, install, usage, credit, license, contribute, test }) {
+function writeToFile({title, motivation, purpose, problem, learn, install, usage, credit, license, contribute, test, question, userName, email }) {
     return `# ${title}
 
 ## Description
@@ -136,6 +117,7 @@ function writeToFile({title, motivation, purpose, problem, learn, install, usage
 ## Table of Contents
 - [Installation](#install)
 - [Usage](#usage)
+- [Credits](#credit)
 - [License](#license)
 - [Contributing](#contribute)
 - [Test](#test)
@@ -147,10 +129,12 @@ ${install}
 ${usage}
 
 ## Credits
-${credit}
+*GitHub:  https://github.com/${userName}/${title}
+
+*Email: ${email}
 
 ## License
-${license}
+${generateMarkdown(license)}
 
 ## Contributing
 ${contribute}
@@ -158,7 +142,8 @@ ${contribute}
 ## Test
 ${test}
 
-## Questions`;
+## Questions
+${question}`;
 }
 
 // TODO: Create a function to initialize app
